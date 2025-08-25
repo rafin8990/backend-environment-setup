@@ -1,1 +1,0 @@
-export const TypeFilterableFields=['searchTerm', 'name']

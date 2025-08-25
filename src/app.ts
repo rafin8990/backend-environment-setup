@@ -1,8 +1,8 @@
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import path from 'path';
 import os from 'os';
+import path from 'path';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 
@@ -60,93 +60,6 @@ app.get('/api/v1/system/metrics', (req: Request, res: Response) => {
         memory: process.memoryUsage(),
         pid: process.pid
       }
-    }
-  });
-});
-
-// API documentation endpoint
-app.get('/api/v1/docs', (req: Request, res: Response) => {
-  res.status(httpStatus.OK).json({
-    success: true,
-    data: {
-      baseUrl: '/api/v1',
-      endpoints: [
-        {
-          method: 'GET',
-          path: '/auth/login',
-          description: 'User authentication'
-        },
-        {
-          method: 'POST',
-          path: '/auth/register',
-          description: 'User registration'
-        },
-        {
-          method: 'GET',
-          path: '/users',
-          description: 'Get all users'
-        },
-        {
-          method: 'GET',
-          path: '/categories',
-          description: 'Get all categories'
-        },
-        {
-          method: 'GET',
-          path: '/items',
-          description: 'Get all items'
-        },
-        {
-          method: 'GET',
-          path: '/stocks',
-          description: 'Get stock information'
-        },
-        {
-          method: 'GET',
-          path: '/location-stocks',
-          description: 'Get location-based stock information'
-        },
-        {
-          method: 'GET',
-          path: '/stock-transfers',
-          description: 'Get stock transfer information'
-        },
-        {
-          method: 'GET',
-          path: '/stock-movements',
-          description: 'Get stock movement history'
-        },
-        {
-          method: 'GET',
-          path: '/suppliers',
-          description: 'Get supplier information'
-        },
-        {
-          method: 'GET',
-          path: '/orders',
-          description: 'Get order information'
-        },
-        {
-          method: 'GET',
-          path: '/recipes',
-          description: 'Get recipe information'
-        },
-        {
-          method: 'GET',
-          path: '/requisitions',
-          description: 'Get requisition information'
-        },
-        {
-          method: 'GET',
-          path: '/locations',
-          description: 'Get location information'
-        },
-        {
-          method: 'GET',
-          path: '/low-stock-alerts',
-          description: 'Get low stock alerts'
-        }
-      ]
     }
   });
 });
