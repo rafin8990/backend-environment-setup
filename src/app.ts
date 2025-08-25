@@ -64,6 +64,32 @@ app.get('/api/v1/system/metrics', (req: Request, res: Response) => {
   });
 });
 
+// API documentation endpoint for dashboard
+app.get('/api/v1/docs', (req: Request, res: Response) => {
+  res.status(httpStatus.OK).json({
+    success: true,
+    data: {
+      endpoints: [
+        {
+          method: 'GET',
+          path: '/api/v1/health',
+          description: 'Health check endpoint for system status'
+        },
+        {
+          method: 'GET',
+          path: '/api/v1/system/metrics',
+          description: 'System metrics and performance data'
+        },
+        {
+          method: 'GET',
+          path: '/api/v1/docs',
+          description: 'API documentation and available endpoints'
+        }
+      ]
+    }
+  });
+});
+
 app.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
@@ -71,7 +97,6 @@ app.get('/', (req: Request, res: Response) => {
 app.use(globalErrorHandler);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-
   res.status(httpStatus.NOT_FOUND).json({
     success: false,
     message: 'Not Found',
