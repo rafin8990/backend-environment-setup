@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import config from '../config';
+import { errorlogger, logger } from '../shared/logger';
 
 const pool = new Pool({
   user: config.db.user,
@@ -10,7 +11,7 @@ const pool = new Pool({
 });
 
 pool.on('connect', () => {
-  console.log('✅ Connected to PostgreSQL database');
+  logger.info('✅ Connected to PostgreSQL database');
 });
 
 type PoolErrorEventHandler = {
@@ -18,7 +19,7 @@ type PoolErrorEventHandler = {
 }
 
 pool.on('error', ((err: Error) => {
-    console.error('❌ Unexpected PostgreSQL error', err);
+    errorlogger.error('❌ Unexpected PostgreSQL error', err);
     process.exit(-1);
 }) as PoolErrorEventHandler);
 
